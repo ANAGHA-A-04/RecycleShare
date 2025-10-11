@@ -1,4 +1,4 @@
-import Item from "../model/item.js";
+import Item from "../user/items.js";
 export const createitem=async(req,res)=>{
     try{
         const{title,description,price,quantity,image}=req.body;
@@ -12,11 +12,11 @@ export const createitem=async(req,res)=>{
         });
         res.status(201).json(item);
     }catch(err){
-        res.send(500).json({message:err.message});
+        res.status(500).json({message:err.message});
     }
         
     };
-  export const getitens=async(req,res)=>{
+  export const getitems=async(req,res)=>{
     try{
         const items=await Item.find({status:"available"}).populate("owner","name email");
         res.json(items);
@@ -27,10 +27,10 @@ export const createitem=async(req,res)=>{
   };
   export const getmyitems= async(req,res)=>{
     try{
-const items=await Item.find({owner:req.owner._id});
+const items=await Item.find({owner:req.user._id});
 res.json(items);
     }catch(err){
      res.status(500).json({message:err.message});
     }
-  }
+  };
 
