@@ -13,7 +13,7 @@ export const signup= async(req,res)=>{
         if(userexist){
             return res.status(400).json({message:"user already exists"});
         }
-        const salt=bcrypt.genSalt(10);
+        const salt=await bcrypt.genSalt(10);
         const hashedpassword=await bcrypt.hash(password,salt);
         const newuser=await User.create({
             name,
