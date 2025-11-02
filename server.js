@@ -13,7 +13,7 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("api is runnning");
 });
-app.use("/api/user",router)
+app.use("/api/user",router);
 app.use("/api/item",itemroute);
 const PORT = process.env.PORT||5000;
 app.listen(PORT,()=>{
